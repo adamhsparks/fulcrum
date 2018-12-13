@@ -6,7 +6,7 @@ Authors@R:
     person("Adam H.", "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com",
     comment = c(ORCID = "0000-0002-0061-8359"))
-Description: Interfaces with FuclrumApp API
+Description: Interfaces with Fulcrum API
     <https://developer.fulcrumapp.com/api/intro/> to make it easier to query and
     fetch data for reporting purposes.
 License: MIT + file LICENSE
