@@ -9,6 +9,9 @@ Authors@R:
 Description: Interfaces with Fulcrum API
     <https://developer.fulcrumapp.com/api/intro/> to make it easier to query and
     fetch data for reporting purposes.
+Imports:
+    curl,
+    data.table
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
