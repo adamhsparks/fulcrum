@@ -1,6 +1,6 @@
 Package: fulcrum
 Type: Package
-Title: Fulcrum API Client to Query Data
+Title: Fulcrum Client to Query and Tidy Data
 Version: 0.0.0.9000
 Authors@R: 
     person("Adam H.", "Sparks",
@@ -17,3 +17,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/adamhsparks/fulcrum
 BugReports: https://github.com/adamhsparks/fulcrum/issues
+RoxygenNote: 6.1.1
