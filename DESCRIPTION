@@ -1,14 +1,13 @@
 Package: fulcrum
 Type: Package
-Title: Fulcrum Client to Query and Tidy Data
+Title: 'Fulcrum' Client to Query and Tidy Data
 Version: 0.0.0.9000
 Authors@R: 
     person("Adam H.", "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com",
     comment = c(ORCID = "0000-0002-0061-8359"))
-Description: Interfaces with Fulcrum API
-    <https://developer.fulcrumapp.com/api/intro/> to make it easier to query and
-    fetch data for reporting purposes.
+Description: Accesses 'Fulcrum' shared data to make it easier to query and fetch
+  data for reporting purposes.
 Imports:
     curl,
     data.table
