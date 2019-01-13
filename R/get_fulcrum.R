@@ -3,7 +3,7 @@
 #' Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
 #' disease incidence and oher related notes for reporting.
 #'
-#' @return A list of tidy \code{\link[tibble]tibble}}s
+#' @return A tidy data frame \code{tibble} object of Fulcrum survey data
 #' @examples
 #' \donttest{
 #' fd <- get_fulcrum()
