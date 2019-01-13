@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_fulcrum.R
 \name{get_fulcrum}
 \alias{get_fulcrum}
-\title{Fetches Data from Fulcrum.app and Formats it for Use in Reporting}
+\title{Fetches Data from Fulcrum.app and Formats Them for Use in Reporting}
 \usage{
 get_fulcrum(url = NULL)
 }

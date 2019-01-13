@@ -1,4 +1,4 @@
-#' Fetches Data from Fulcrum.app and Formats it for Use in Reporting
+#' Fetches Data from Fulcrum.app and Formats Them for Use in Reporting
 #'
 #' Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
 #' disease incidence and oher related notes for reporting.
