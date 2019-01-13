@@ -2,20 +2,31 @@
 #'
 #' Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
 #' disease incidence and oher related notes for reporting.
-#'
+#' @param url A url provided by \url{https://www.fulcrumapp.com/} for sharing a
+#' 'CSV' format fill of Fulcrum data
 #' @return A tidy data frame \code{tibble} object of Fulcrum survey data
 #' @examples
-#' \donttest{
+#'
+#' \dontrun{
+#' # using a URL set in the .Renviron, get data from Fulcrum
 #' fd <- get_fulcrum()
+#' }
+#'
+#' \dontrun{
+#' # specify a url to get data from Fulcrum
+#' fd <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
 #' }
 #' @export get_fulcrum
 #'
-get_fulcrum <- function() {
-  FULCRUM_DATA_URL <- Sys.getenv("FULCRUM_DATA_URL")
+get_fulcrum <- function(url = NULL) {
+
+  if (is.null(url)) {
+    url <- Sys.getenv("FULCRUM_DATA_URL")
+  }
 
   fd <-
     readr::read_csv(
-      FULCRUM_DATA_URL,
+      url,
       na = c(""),
       col_types = readr::cols(
         fulcrum_id = readr::col_character(),

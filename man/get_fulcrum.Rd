@@ -4,7 +4,11 @@
 \alias{get_fulcrum}
 \title{Fetches Data from Fulcrum.app and Formats it for Use in Reporting}
 \usage{
-get_fulcrum()
+get_fulcrum(url = NULL)
+}
+\arguments{
+\item{url}{A url provided by \url{https://www.fulcrumapp.com/} for sharing a
+'CSV' format fill of Fulcrum data}
 }
 \value{
 A tidy data frame \code{tibble} object of Fulcrum survey data
@@ -14,7 +18,14 @@ Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
 disease incidence and oher related notes for reporting.
 }
 \examples{
-\donttest{
+
+\dontrun{
+# using a URL set in the .Renviron, get data from Fulcrum
 fd <- get_fulcrum()
+}
+
+\dontrun{
+# specify a url to get data from Fulcrum
+fd <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
 }
 }
