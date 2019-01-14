@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/adamhsparks/fulcrum.svg?branch=master)](https://travis-ci.org/adamhsparks/fulcrum)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 # fulcrum
