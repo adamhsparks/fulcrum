@@ -28,4 +28,8 @@ fd <- get_fulcrum()
 # specify a url to get data from Fulcrum
 fd <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
 }
+
+}
+\author{
+Sparks, Adam H. \email{adam.sparks@usq.edu.au}
 }

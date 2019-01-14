@@ -16,12 +16,13 @@
 #' # specify a url to get data from Fulcrum
 #' fd <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
 #' }
+#'
+#' @author Sparks, Adam H. \email{adam.sparks@@usq.edu.au}
 #' @export get_fulcrum
 #' @importFrom magrittr "%>%"
 get_fulcrum <- function(url = NULL) {
 
-  # CRAN note avoidance (even though it's never going to CRAN)
-
+  # CRAN note avoidance (even though it's never going to CRAN) -----------------
       "fulcrum_id" <- #nocov start
       "created_at" <-
       "updated_at" <-
@@ -206,10 +207,12 @@ get_fulcrum <- function(url = NULL) {
       "disease.y" <-
       "." <- NULL #nocov end
 
+  # get URL using system environment if not otherwise provided -----------------
   if (is.null(url)) {
     url <- Sys.getenv("FULCRUM_DATA_URL")
   }
 
+  # fetch data from fulcrumapp.com ---------------------------------------------
   fd <-
     readr::read_csv(
       url,
@@ -496,4 +499,5 @@ get_fulcrum <- function(url = NULL) {
     dplyr::left_join(., xy, by = "fulcrum_id") %>%
     dplyr::left_join(., crop_meta, by = "fulcrum_id") %>%
     dplyr::left_join(., disease_incidence, by = "fulcrum_id")
+
 }
