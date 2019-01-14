@@ -2,22 +2,19 @@
 
 # fulcrum
 
-The goal of fulcrum is to ...
+The goal of `fulcrum` is to allow easy querying and cleaning of USQ/DAFQ paddock survey data for generating reports.
 
 ## Installation
 
-You can install the released version of fulcrum from [CRAN](https://CRAN.R-project.org) with:
+You can install `fulcrum` from [GitHub](https://github.com/adamhsparks/fulcrum) with:
 
 ``` r
-install.packages("fulcrum")
-```
+if (!require("remotes")) {
+  install.packages("remotes", repos = "http://cran.rstudio.com/")
+  library("remotes")
+}
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
+install_github("adamhsparks/fulcrum")
 ```
 
 Please note that the 'fulcrum' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
