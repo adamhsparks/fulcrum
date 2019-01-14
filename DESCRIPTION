@@ -9,8 +9,10 @@ Authors@R:
 Description: Accesses 'Fulcrum' shared data to make it easier to query and fetch
   data for reporting purposes.
 Imports:
-    curl,
-    data.table
+    dplyr,
+    magrittr,
+    readr,
+    tidyr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
