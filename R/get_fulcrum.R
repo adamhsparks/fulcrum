@@ -21,7 +21,6 @@
 #' @export get_fulcrum
 #' @importFrom magrittr "%>%"
 get_fulcrum <- function(url = NULL) {
-
   # get URL using system environment if not otherwise provided -----------------
   if (is.null(url)) {
     url <- Sys.getenv("FULCRUM_DATA_URL")
@@ -121,25 +120,33 @@ get_fulcrum <- function(url = NULL) {
     dplyr::mutate(grower = tolower(agronomist)) %>%
     dplyr::mutate(grower = tools::toTitleCase(agronomist))
 
-  out <-
-    dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
-    dplyr::left_join(., xy, by = "fulcrum_id") %>%
-    dplyr::left_join(., crop_meta, by = "fulcrum_id") %>%
-    dplyr::left_join(., disease_incidence, by = "fulcrum_id") %>%
-    dplyr::mutate(created_at = lubridate::as_datetime(created_at,
-                                                      tz = "GMT")) %>%
-    dplyr::mutate(updated_at = lubridate::as_datetime(updated_at,
-                                                      tz = "GMT")) %>%
-    dplyr::mutate(system_created_at = lubridate::as_datetime(system_created_at,
-                                                             tz = "GMT")) %>%
-    dplyr::mutate(system_updated_at = lubridate::as_datetime(system_updated_at,
-                                                             tz = "GMT")) %>%
-    dplyr::mutate(season = as.factor(season)) %>%
-    dplyr::mutate(location_description = as.factor(location_description)) %>%
-    dplyr::mutate(landform = as.factor(landform)) %>%
-    dplyr::mutate(region = as.factor(region)) %>%
-    dplyr::mutate(crop = as.factor(crop)) %>%
-    dplyr::mutate(growth_stage = as.factor(growth_stage)) %>%
-    dplyr::mutate(disease = as.factor(disease)) %>%
-    dplyr::mutate(incidence = as.integer(incidence))
+  return(
+    out <-
+      dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
+      dplyr::left_join(., xy, by = "fulcrum_id") %>%
+      dplyr::left_join(., crop_meta, by = "fulcrum_id") %>%
+      dplyr::left_join(., disease_incidence, by = "fulcrum_id") %>%
+      dplyr::mutate(created_at = lubridate::as_datetime(created_at,
+                                                        tz = "GMT")) %>%
+      dplyr::mutate(updated_at = lubridate::as_datetime(updated_at,
+                                                        tz = "GMT")) %>%
+      dplyr::mutate(
+        system_created_at = lubridate::as_datetime(system_created_at,
+                                                   tz = "GMT")
+      ) %>%
+      dplyr::mutate(
+        system_updated_at = lubridate::as_datetime(system_updated_at,
+                                                   tz = "GMT")
+      ) %>%
+      dplyr::mutate(created_by = as.factor(created_by)) %>%
+      dplyr::mutate(updated_by = as.factor(updated_by)) %>%
+      dplyr::mutate(season = as.factor(season)) %>%
+      dplyr::mutate(location_description = as.factor(location_description)) %>%
+      dplyr::mutate(landform = as.factor(landform)) %>%
+      dplyr::mutate(region = as.factor(region)) %>%
+      dplyr::mutate(crop = as.factor(crop)) %>%
+      dplyr::mutate(growth_stage = as.factor(growth_stage)) %>%
+      dplyr::mutate(disease = as.factor(disease)) %>%
+      dplyr::mutate(incidence = as.integer(incidence))
+  )
 }

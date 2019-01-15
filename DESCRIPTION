@@ -6,10 +6,11 @@ Authors@R:
     person("Adam H.", "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com",
     comment = c(ORCID = "0000-0002-0061-8359"))
-Description: Accesses 'Fulcrum' shared data to make it easier to query and fetch
-  data for reporting purposes.
+Description: Accesses 'Fulcrum' shared data to make it easier to query and use
+  for for reporting purposes.
 Imports:
     dplyr,
+    lubridate,
     magrittr,
     readr,
     tidyr
