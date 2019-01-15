@@ -21,12 +21,12 @@ disease incidence and oher related notes for reporting.
 
 \dontrun{
 # using a URL set in the .Renviron, get data from Fulcrum
-fd <- get_fulcrum()
+x <- get_fulcrum()
 }
 
 \dontrun{
 # specify a url to get data from Fulcrum
-fd <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
+x <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
 }
 
 }
