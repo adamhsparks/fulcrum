@@ -190,7 +190,7 @@
     "." <- NULL #nocov end
 
   readr::read_csv(
-    url,
+    .url,
     na = c(""),
     col_types = readr::cols(
       fulcrum_id = readr::col_character(),

@@ -138,15 +138,6 @@ get_fulcrum <- function(url = NULL) {
         system_updated_at = lubridate::as_datetime(system_updated_at,
                                                    tz = "GMT")
       ) %>%
-      dplyr::mutate(created_by = as.factor(created_by)) %>%
-      dplyr::mutate(updated_by = as.factor(updated_by)) %>%
-      dplyr::mutate(season = as.factor(season)) %>%
-      dplyr::mutate(location_description = as.factor(location_description)) %>%
-      dplyr::mutate(landform = as.factor(landform)) %>%
-      dplyr::mutate(region = as.factor(region)) %>%
-      dplyr::mutate(crop = as.factor(crop)) %>%
-      dplyr::mutate(growth_stage = as.factor(growth_stage)) %>%
-      dplyr::mutate(disease = as.factor(disease)) %>%
       dplyr::mutate(incidence = as.integer(incidence))
   )
 }

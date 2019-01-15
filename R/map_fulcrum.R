@@ -6,13 +6,14 @@
 #'
 #' @param fd Required. Fulcrum data to use for mapping. Must be supplied from
 #' \code{\link{get_fulcrum}}.
-#' @param crop Optional. Map by crop type. If not specified all crops are
+#' @param crop Optional. Character vector of crop(s) to map by crop type.  If
+#'  not specified all crops are  mapped.
+#' @param disease Optional. Character vector of disease(s) to map by disease(s)
+#'  of interest. If not specified, all diseases are mapped. Overrides crop type.
+#' @param location Optional. Character vector of location(s) to map by location
+#'  type. If not specified all locations are mapped.
+#' @param season Optional. Map by season(s). If not specified, all seasons
 #'  mapped.
-#' @param disease Optional. Map by disease of interest. If not specified, all
-#' diseases are mapped. Overrides crop type.
-#' @param location Optional. Map by location type. If not specified all
-#'  locations are mapped.
-#' @param season Optional. Map by season. If not specified, all seasons mapped.
 #'
 #' @section Crop Values:
 #'  Acceptable values for crop are
@@ -78,5 +79,25 @@ map_fulcrum <- function(fd,
                         disease = NULL,
                         location = NULL,
                         season = NULL) {
+
+  if (!is.null(crop)) {
+    fd_crop <-
+      fd %>% dplyr::filter(crop %in% crop)
+  }
+
+  if (!is.null(disease)) {
+    fd <-
+      fd %>% dplyr::filter(disease %in% disease)
+  }
+
+  if (!is.null(location)) {
+    fd <-
+      fd %>% dplyr::filter(location %in% location)
+  }
+
+  if (!is.null(season)) {
+    fd <-
+      fd %>% dplyr::filter(season %in% season)
+  }
 
 }
