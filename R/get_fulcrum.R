@@ -60,7 +60,7 @@ get_fulcrum <- function(url = NULL) {
     "winter_cereal_growth_stage_" <-
     "total_plant_count" <-
     "barley_fusarium_head_blightscab" <-
-    "barley_net_form_spot_blotch" <-
+    "barley_net_form_net_blotch" <-
     "barley_spot_form_net_blotch" <-
     "barley_powdery_mildew" <-
     "barley_stem_rust" <-
@@ -255,7 +255,7 @@ get_fulcrum <- function(url = NULL) {
         winter_cereal_growth_stage_ = readr::col_character(),
         total_plant_count = readr::col_integer(),
         barley_fusarium_head_blightscab = readr::col_integer(),
-        barley_net_form_spot_blotch = readr::col_integer(),
+        barley_net_form_net_blotch = readr::col_integer(),
         barley_spot_form_net_blotch = readr::col_integer(),
         barley_powdery_mildew = readr::col_integer(),
         barley_stem_rust = readr::col_integer(),
@@ -491,6 +491,21 @@ get_fulcrum <- function(url = NULL) {
     dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
     dplyr::left_join(., xy, by = "fulcrum_id") %>%
     dplyr::left_join(., crop_meta, by = "fulcrum_id") %>%
-    dplyr::left_join(., disease_incidence, by = "fulcrum_id")
-
+    dplyr::left_join(., disease_incidence, by = "fulcrum_id") %>%
+    dplyr::mutate(created_at = lubridate::as_datetime(created_at,
+                                                      tz = "GMT")) %>%
+  dplyr::mutate(updated_at = lubridate::as_datetime(updated_at,
+                                         tz = "GMT")) %>%
+  dplyr::mutate(system_created_at = lubridate::as_datetime(system_created_at,
+                                         tz = "GMT")) %>%
+  dplyr::mutate(system_updated_at = lubridate::as_datetime(system_updated_at,
+                                         tz = "GMT")) %>%
+  dplyr::mutate(season = as.factor(season)) %>%
+  dplyr::mutate(location_description = as.factor(location_description)) %>%
+  dplyr::mutate(landform = as.factor(landform)) %>%
+  dplyr::mutate(region = as.factor(region)) %>%
+  dplyr::mutate(crop = as.factor(crop)) %>%
+  dplyr::mutate(growth_stage = as.factor(growth_stage)) %>%
+  dplyr::mutate(disease = as.factor(disease)) %>%
+  dplyr::mutate(incidence = as.integer(incidence))
 }
