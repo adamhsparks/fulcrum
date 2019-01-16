@@ -1,16 +1,22 @@
 #' Creates Disease Incidence Data Frame
 #' @param .fd Data frame containing Fulcrum data
+#' @importFrom rlang .data
 #' @noRd
 .create_di_df <- function(.fd) {
   .fd %>%
-    dplyr::select(fulcrum_id,
-                  barley_fusarium_head_blightscab:describe_wheat_other) %>%
-    tidyr::gather(key = disease,
-                  value = incidence,
-                  -fulcrum_id) %>%
+    dplyr::select(
+      .data,
+      .data$fulcrum_id,
+      .data$barley_fusarium_head_blightscab:.data$describe_wheat_other
+    ) %>%
+    tidyr::gather(.data,
+                  key = .data$disease,
+                  value = .data$incidence,
+                  -.data$fulcrum_id) %>%
     dplyr::mutate(
       disease =
-        dplyr::recode(disease,
+        dplyr::recode(
+          .data$disease,
           barley_fusarium_head_blightscab = "fusarium head blight",
           barley_net_form_net_blotch = "net form net blotch",
           barley_spot_form_net_blotch = "spot form net blotch",

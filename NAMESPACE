@@ -3,3 +3,4 @@
 export(filter_fulcrum)
 export(get_fulcrum)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)

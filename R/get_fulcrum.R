@@ -20,6 +20,7 @@
 #' @author Sparks, Adam H. \email{adam.sparks@@usq.edu.au}
 #' @export get_fulcrum
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 get_fulcrum <- function(url = NULL) {
   # get URL using system environment if not otherwise provided -----------------
   if (is.null(url)) {
@@ -34,12 +35,16 @@ get_fulcrum <- function(url = NULL) {
   # cultivar
   # growth_stage
   crop_meta <-
-    fd  %>% dplyr::select(fulcrum_id, crop:winter_cereal_growth_stage_) %>%
-    tidyr::gather(key = crop_gs,
-                  value = growth_stage,
-                  c(-fulcrum_id, -crop, -cultivar)) %>%
-    dplyr::select(-crop_gs) %>%
-    tidyr::drop_na(growth_stage)
+    fd  %>% dplyr::select(.data$fulcrum_id,
+                          .data$crop:.data$winter_cereal_growth_stage_) %>%
+    tidyr::gather(
+      .data,
+      key = .data$crop_gs,
+      value = .data$growth_stage,
+      -c(.data$fulcrum_id, .data$crop, .data$cultivar)
+    ) %>%
+    dplyr::select(-.data$crop_gs) %>%
+    tidyr::drop_na(.data$growth_stage)
 
   # create tibble for disease observations -------------------------------------
   # disease
@@ -52,30 +57,35 @@ get_fulcrum <- function(url = NULL) {
   # filter only
   other_disease <-
     disease_incidence %>%
-    dplyr::filter(grepl("other", disease) &
-                    !grepl("describe", disease)) %>%
-    tidyr::drop_na(incidence)
+    dplyr::filter(grepl("other", .data$disease) &
+                    !grepl("describe", .data$disease)) %>%
+    tidyr::drop_na(.data$incidence)
 
   describe_other <-
     disease_incidence %>%
-    dplyr::filter(grepl("describe", disease)) %>%
-    dplyr::select(-disease) %>%
-    dplyr::rename(disease = incidence) %>%
-    dplyr::distinct()
+    dplyr::filter(grepl("describe", .data$disease)) %>%
+    dplyr::select(-.data$disease) %>%
+    dplyr::rename(disease = .data$incidence) %>%
+    dplyr::distinct
 
   other_disease <-
     dplyr::left_join(describe_other, other_disease, by = "fulcrum_id") %>%
-    dplyr::mutate(disease = ifelse(!is.na(disease.x), disease.x, disease.y)) %>%
-    dplyr::select(-disease.x, -disease.y)
+    dplyr::mutate(.data, disease = ifelse(
+      !is.na(.data$disease.x),
+      .data$disease.x,
+      .data$disease.y)
+    ) %>%
+    dplyr::select(-c(.data$disease.x, .data$disease.y))
 
   # remove any "other" diseases requiring description from original and add
   # `other_disease` for final `disease_incidence` tibble
   disease_incidence <-
-    dplyr::filter(disease_incidence, !grepl("other", disease)) %>%
+    disease_incidence %>%
+    dplyr::filter(!grepl("other", .data$disease)) %>%
     dplyr::left_join(disease_incidence,
                      other_disease,
                      by = c("fulcrum_id", "disease", "incidence")) %>%
-    tidyr::drop_na(incidence)
+    tidyr::drop_na(.data$incidence)
 
   # create a tibble for geocoded locations -------------------------------------
   # lon
@@ -83,9 +93,9 @@ get_fulcrum <- function(url = NULL) {
   # nearest town
   # region
   xy <- fd %>%
-    dplyr::select(fulcrum_id, latitude, longitude, nearest_town, region) %>%
-    dplyr::mutate(nearest_town = tolower(nearest_town)) %>%
-    dplyr::mutate(nearest_town = tools::toTitleCase(nearest_town))
+    dplyr::select(.data$fulcrum_id, .data$latitude, .data$longitude, .data$nearest_town, .data$region) %>%
+    dplyr::mutate(nearest_town = tolower(.data$nearest_town)) %>%
+    dplyr::mutate(nearest_town = tools::toTitleCase(.data$nearest_town))
 
   # create a tibble for observer and observation metadata ----------------------
   # when created
@@ -96,7 +106,10 @@ get_fulcrum <- function(url = NULL) {
   # what season does the observation cover
   # how many plants were checked
   observation_meta <- fd %>%
-    dplyr::select(fulcrum_id, created_at:version, season, total_plant_count)
+    dplyr::select(.data$fulcrum_id,
+                  .data$created_at:version,
+                  .data$season,
+                  .data$total_plant_count)
 
   # create a tibble for paddock information ------------------------------------
   # USQ paddock identifcation number
@@ -109,35 +122,35 @@ get_fulcrum <- function(url = NULL) {
   # any freeform notes taken
   paddock_meta <- fd %>%
     dplyr::select(
-      fulcrum_id,
-      paddockproperty:location_description,
-      landform,
-      grower:agronomists_phone_number,
-      notes
+      .data$fulcrum_id,
+      .data$paddockproperty:.data$location_description,
+      .data$landform,
+      .data$grower:.data$agronomists_phone_number,
+      .data$notes
     ) %>%
-    dplyr::mutate(grower = tolower(grower)) %>%
-    dplyr::mutate(grower = tools::toTitleCase(grower)) %>%
-    dplyr::mutate(grower = tolower(agronomist)) %>%
-    dplyr::mutate(grower = tools::toTitleCase(agronomist))
+    dplyr::mutate(grower = tolower(.data$grower)) %>%
+    dplyr::mutate(grower = tools::toTitleCase(.data$grower)) %>%
+    dplyr::mutate(agronomist = tolower(.data$agronomist)) %>%
+    dplyr::mutate(agronomist = tools::toTitleCase(.data$agronomist))
 
   return(
     out <-
       dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
-      dplyr::left_join(., xy, by = "fulcrum_id") %>%
-      dplyr::left_join(., crop_meta, by = "fulcrum_id") %>%
-      dplyr::left_join(., disease_incidence, by = "fulcrum_id") %>%
-      dplyr::mutate(created_at = lubridate::as_datetime(created_at,
-                                                        tz = "GMT")) %>%
-      dplyr::mutate(updated_at = lubridate::as_datetime(updated_at,
-                                                        tz = "GMT")) %>%
+      dplyr::left_join(xy, by = "fulcrum_id") %>%
+      dplyr::left_join(crop_meta, by = "fulcrum_id") %>%
+      dplyr::left_join(disease_incidence, by = "fulcrum_id") %>%
+      dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
+                                                               tz = "GMT")) %>%
+      dplyr::mutate(updated_at = lubridate::as_datetime(.data$updated_at,
+                                                               tz = "GMT")) %>%
       dplyr::mutate(
-        system_created_at = lubridate::as_datetime(system_created_at,
+        system_created_at = lubridate::as_datetime(.data$system_created_at,
                                                    tz = "GMT")
       ) %>%
       dplyr::mutate(
-        system_updated_at = lubridate::as_datetime(system_updated_at,
+        system_updated_at = lubridate::as_datetime(.data$system_updated_at,
                                                    tz = "GMT")
       ) %>%
-      dplyr::mutate(incidence = as.integer(incidence))
+      dplyr::mutate(incidence = as.integer(.data$incidence))
   )
 }

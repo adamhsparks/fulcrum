@@ -61,6 +61,7 @@
 #'  data
 #'
 #' @importFrom magrittr "%>%"
+#' @importFrom rlang .data
 #' @export filter_fulcrum
 
 filter_fulcrum <- function(fd,
@@ -68,9 +69,9 @@ filter_fulcrum <- function(fd,
                            disease = NULL,
                            location = NULL,
                            season = NULL) {
-
   fd <-
-    fd %>% dplyr::filter(crop %in% crop |
+    fd %>% dplyr::filter(.data,
+                         crop %in% crop |
                            disease %in% disease |
                            location %in% location |
                            season %in% season)
