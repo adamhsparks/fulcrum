@@ -37,14 +37,11 @@ get_fulcrum <- function(url = NULL) {
   crop_meta <-
     fd  %>% dplyr::select(.data$fulcrum_id,
                           .data$crop:.data$winter_cereal_growth_stage_) %>%
-    tidyr::gather(
-      .data,
-      key = .data$crop_gs,
-      value = .data$growth_stage,
-      -c(.data$fulcrum_id, .data$crop, .data$cultivar)
-    ) %>%
-    dplyr::select(-.data$crop_gs) %>%
-    tidyr::drop_na(.data$growth_stage)
+    tidyr::gather(key = "crop_gs",
+                  value = "growth_stage",
+                  -c("fulcrum_id", "crop", "cultivar")) %>%
+    dplyr::select(-"crop_gs") %>%
+    tidyr::drop_na("growth_stage")
 
   # create tibble for disease observations -------------------------------------
   # disease
@@ -66,16 +63,14 @@ get_fulcrum <- function(url = NULL) {
     dplyr::filter(grepl("describe", .data$disease)) %>%
     dplyr::select(-.data$disease) %>%
     dplyr::rename(disease = .data$incidence) %>%
-    dplyr::distinct
+    dplyr::distinct()
 
   other_disease <-
     dplyr::left_join(describe_other, other_disease, by = "fulcrum_id") %>%
-    dplyr::mutate(.data, disease = ifelse(
-      !is.na(.data$disease.x),
-      .data$disease.x,
-      .data$disease.y)
-    ) %>%
-    dplyr::select(-c(.data$disease.x, .data$disease.y))
+    dplyr::mutate(disease = ifelse(!is.na("disease"),
+                                   "disease.x",
+                                   "disease.y")) %>%
+    dplyr::select(-c("disease.x", "disease.y"))
 
   # remove any "other" diseases requiring description from original and add
   # `other_disease` for final `disease_incidence` tibble
@@ -93,7 +88,13 @@ get_fulcrum <- function(url = NULL) {
   # nearest town
   # region
   xy <- fd %>%
-    dplyr::select(.data$fulcrum_id, .data$latitude, .data$longitude, .data$nearest_town, .data$region) %>%
+    dplyr::select(
+      .data$fulcrum_id,
+      .data$latitude,
+      .data$longitude,
+      .data$nearest_town,
+      .data$region
+    ) %>%
     dplyr::mutate(nearest_town = tolower(.data$nearest_town)) %>%
     dplyr::mutate(nearest_town = tools::toTitleCase(.data$nearest_town))
 
@@ -106,10 +107,12 @@ get_fulcrum <- function(url = NULL) {
   # what season does the observation cover
   # how many plants were checked
   observation_meta <- fd %>%
-    dplyr::select(.data$fulcrum_id,
-                  .data$created_at:version,
-                  .data$season,
-                  .data$total_plant_count)
+    dplyr::select(
+      .data$fulcrum_id,
+      .data$created_at:version,
+      .data$season,
+      .data$total_plant_count
+    )
 
   # create a tibble for paddock information ------------------------------------
   # USQ paddock identifcation number
@@ -140,9 +143,9 @@ get_fulcrum <- function(url = NULL) {
       dplyr::left_join(crop_meta, by = "fulcrum_id") %>%
       dplyr::left_join(disease_incidence, by = "fulcrum_id") %>%
       dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
-                                                               tz = "GMT")) %>%
+                                                        tz = "GMT")) %>%
       dplyr::mutate(updated_at = lubridate::as_datetime(.data$updated_at,
-                                                               tz = "GMT")) %>%
+                                                        tz = "GMT")) %>%
       dplyr::mutate(
         system_created_at = lubridate::as_datetime(.data$system_created_at,
                                                    tz = "GMT")

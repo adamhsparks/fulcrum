@@ -4,15 +4,11 @@
 #' @noRd
 .create_di_df <- function(.fd) {
   .fd %>%
-    dplyr::select(
-      .data,
-      .data$fulcrum_id,
-      .data$barley_fusarium_head_blightscab:.data$describe_wheat_other
-    ) %>%
-    tidyr::gather(.data,
-                  key = .data$disease,
-                  value = .data$incidence,
-                  -.data$fulcrum_id) %>%
+    dplyr::select("fulcrum_id",
+                  "barley_fusarium_head_blightscab":"describe_wheat_other") %>%
+    tidyr::gather(key = "disease",
+                  value = "incidence",
+                  -"fulcrum_id") %>%
     dplyr::mutate(
       disease =
         dplyr::recode(
