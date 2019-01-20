@@ -20,7 +20,7 @@ filter_fulcrum(fd, crop = NULL, disease = NULL, location = NULL,
 \item{season}{Optional. Character vector of season(s) to filter on.}
 }
 \value{
-A \code{\link[tibble]{tibble}} of Filtered Fulcrum data by the
+A \code{\link[tibble]{tibble}} of filtered Fulcrum data by the
  requested parameters.
 }
 \description{

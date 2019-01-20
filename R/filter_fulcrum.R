@@ -49,7 +49,7 @@
 #'    \item \code{Summer 2019/20}.
 #'  }
 #'
-#' @return A \code{\link[tibble]{tibble}} of Filtered Fulcrum data by the
+#' @return A \code{\link[tibble]{tibble}} of filtered Fulcrum data by the
 #'  requested parameters.
 #' @examples
 #' \dontrun{
@@ -69,6 +69,12 @@ filter_fulcrum <- function(fd,
                            disease = NULL,
                            location = NULL,
                            season = NULL) {
+
+  crop <- .simple_cap(crop)
+  disease <- tolower(disease)
+  location <- tools::toTitleCase(location)
+  season <- tools::toTitleCase(season)
+
   fd <-
     fd %>% dplyr::filter(.data,
                          crop %in% crop |
