@@ -22,4 +22,5 @@ URL: https://github.com/adamhsparks/fulcrum
 BugReports: https://github.com/adamhsparks/fulcrum/issues
 RoxygenNote: 6.1.1
 Suggests: 
-    testthat
+    testthat,
+    covr
