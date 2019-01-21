@@ -5,7 +5,7 @@ sudo: false
 cache: packages
 
 before_install:
-  - sudo apt-get install -y libudunits-dev
+  - sudo apt-get install -y libudunits2-dev
 
 after_failure:
   - ./pkg-build.sh dump_logs
