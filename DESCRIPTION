@@ -11,6 +11,7 @@ Description: Accesses 'Fulcrum' shared data to make it easier to query and use
 Depends: R (>= 2.10)
 Imports:
     dplyr,
+    ggplot2,
     lubridate,
     magrittr,
     readr,
