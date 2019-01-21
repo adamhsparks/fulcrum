@@ -10,7 +10,7 @@
 #' @param location Optional. Character vector of location(s) to filter on.
 #' @param season Optional. Character vector of season(s) to filter on.
 #'
-#' @section Crop Values:
+#' @section Accepted \code{crop} Values:
 #'  Acceptable values for crop are
 #'  \itemize{
 #'    \item \code{barley},
@@ -25,13 +25,13 @@
 #'    \item \code{wheat}
 #'  }
 #'
-#' @section Disease Values:
+#' @section Accepted \code{disease} Values:
 #'  Acceptable values for disease are
 #'  \itemize{
 #'    \item \code{},
 #'  }
 #'
-#' @section Location Values:
+#' @section Accepted \code{location_description} Values:
 #'  Acceptable values for location are
 #'  \itemize{
 #'    \item \code{farm field},
@@ -40,7 +40,7 @@
 #'    \item \code{roadside}.
 #'  }
 #'
-#' @section Season Values:
+#' @section Accepted \code{season} Values:
 #'  Acceptable values for season are
 #'  \itemize{
 #'    \item \code{Winter 2018},
@@ -67,19 +67,30 @@
 filter_fulcrum <- function(fd,
                            crop = NULL,
                            disease = NULL,
-                           location = NULL,
+                           location_description = NULL,
                            season = NULL) {
+  if (!is.null(crop)) {
+    crop <- .simple_cap(crop)
+  }
 
-  crop <- .simple_cap(crop)
-  disease <- tolower(disease)
-  location <- tools::toTitleCase(location)
-  season <- tools::toTitleCase(season)
+  if (!is.null(disease)) {
+    disease <- tolower(disease)
+  }
+
+  if (!is.null(location_description)) {
+    location_description <- tolower(location_description)
+  }
+
+  if (!is.null(season)) {
+    season <- .simple_cap(season)
+  }
 
   fd <-
-    fd %>% dplyr::filter(.data,
-                         crop %in% crop |
-                           disease %in% disease |
-                           location %in% location |
-                           season %in% season)
-
+    fd %>% dplyr::slice(
+      match(crop, crop, 0L) |
+        match(disease, disease, 0L) |
+        match(location_description, location_description, 0L) |
+        match(season, season, 0L)
+    )
+return(fd)
 }

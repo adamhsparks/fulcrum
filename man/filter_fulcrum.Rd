@@ -4,8 +4,8 @@
 \alias{filter_fulcrum}
 \title{Filters Survey Data from get_fulcrum}
 \usage{
-filter_fulcrum(fd, crop = NULL, disease = NULL, location = NULL,
-  season = NULL)
+filter_fulcrum(fd, crop = NULL, disease = NULL,
+  location_description = NULL, season = NULL)
 }
 \arguments{
 \item{fd}{Required. Fulcrum data to be filtered.  Data must be a result of
@@ -15,9 +15,9 @@ filter_fulcrum(fd, crop = NULL, disease = NULL, location = NULL,
 
 \item{disease}{Optional. Character vector of disease(s) to filter on.}
 
-\item{location}{Optional. Character vector of location(s) to filter on.}
-
 \item{season}{Optional. Character vector of season(s) to filter on.}
+
+\item{location}{Optional. Character vector of location(s) to filter on.}
 }
 \value{
 A \code{\link[tibble]{tibble}} of filtered Fulcrum data by the
@@ -27,7 +27,7 @@ A \code{\link[tibble]{tibble}} of filtered Fulcrum data by the
 Filters data retrieved using \code{\link{get_fulcrum}}.  Data can be filtered
 by locations surveyed, crop, disease, location description or season.
 }
-\section{Crop Values}{
+\section{Accepted \code{crop} Values}{
 
  Acceptable values for crop are
  \itemize{
@@ -44,7 +44,7 @@ by locations surveyed, crop, disease, location description or season.
  }
 }
 
-\section{Disease Values}{
+\section{Accepted \code{disease} Values}{
 
  Acceptable values for disease are
  \itemize{
@@ -52,7 +52,7 @@ by locations surveyed, crop, disease, location description or season.
  }
 }
 
-\section{Location Values}{
+\section{Accepted \code{location_description} Values}{
 
  Acceptable values for location are
  \itemize{
@@ -63,7 +63,7 @@ by locations surveyed, crop, disease, location description or season.
  }
 }
 
-\section{Season Values}{
+\section{Accepted \code{season} Values}{
 
  Acceptable values for season are
  \itemize{
