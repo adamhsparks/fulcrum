@@ -1,3 +1,14 @@
+# 0.1.2
+
+## Minor Changes
+
+- Add federation level data outline for mapping
+
+- Add state level data for labelling and mapping
+
+- Project both sets of data to Albers
+
+
 # 0.1.1
 
 ## Bug Fixes
