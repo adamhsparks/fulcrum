@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/adamhsparks/fulcrum.svg?branch=master)](https://travis-ci.org/adamhsparks/fulcrum)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/fulcrum?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/fulcrum)
 [![Coverage status](https://codecov.io/gh/adamhsparks/fulcrum/branch/master/graph/badge.svg)](https://codecov.io/github/adamhsparks/fulcrum?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 # fulcrum
 
