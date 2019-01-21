@@ -1,3 +1,9 @@
+# 0.1.1
+
+## Bug Fixes
+
+- Fixes bugs in prior release so that it now passes checks
+
 # 0.1.0
 
 ## Major Changes
