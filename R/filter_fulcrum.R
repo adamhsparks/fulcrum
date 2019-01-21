@@ -85,7 +85,7 @@ filter_fulcrum <- function(fd,
   }
 
   if (!is.null(location_description)) {
-    target_ld <- tolower(target_ld)
+    target_ld <- .simple_cap(target_ld)
   }
 
   if (!is.null(season)) {
