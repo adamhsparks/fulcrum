@@ -53,8 +53,9 @@
 #'  requested parameters.
 #' @examples
 #' \dontrun{
+#' x <- get_fulcrum()
 #' # map only mungbean surveys
-#' x <- filter_fulcrum(fd = fulcrum_data, crop = "mungbean")
+#' x <- filter_fulcrum(fd = x, crop = "mungbean")
 #' }
 #' @author Sparks, Adam H. \email{adam.sparks@@usq.edu.au}
 #' @seealso \code{\link{get_fulcrum}} for retrieving and formatting Fulcrum
@@ -69,28 +70,35 @@ filter_fulcrum <- function(fd,
                            disease = NULL,
                            location_description = NULL,
                            season = NULL) {
+
+  target_c <- crop
+  target_d <- disease
+  target_ld <- location_description
+  target_s <- season
+
   if (!is.null(crop)) {
-    crop <- .simple_cap(crop)
+    target_c <- .simple_cap(target_c)
   }
 
   if (!is.null(disease)) {
-    disease <- tolower(disease)
+    target_d <- tolower(target_d)
   }
 
   if (!is.null(location_description)) {
-    location_description <- tolower(location_description)
+    target_ld <- tolower(target_ld)
   }
 
   if (!is.null(season)) {
-    season <- .simple_cap(season)
+    target_s <- .simple_cap(target_s)
   }
 
   fd <-
-    fd %>% dplyr::slice(
-      match(crop, crop, 0L) |
-        match(disease, disease, 0L) |
-        match(location_description, location_description, 0L) |
-        match(season, season, 0L)
+    fd %>%
+    dplyr::filter(
+    crop %in% target_c |
+      disease %in% target_d |
+      location_description %in% target_ld |
+      season %in% target_s
     )
-return(fd)
+  return(fd)
 }

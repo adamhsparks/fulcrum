@@ -76,8 +76,9 @@ by locations surveyed, crop, disease, location description or season.
 
 \examples{
 \dontrun{
+x <- get_fulcrum()
 # map only mungbean surveys
-x <- filter_fulcrum(fd = fulcrum_data, crop = "mungbean")
+x <- filter_fulcrum(fd = x, crop = "mungbean")
 }
 }
 \seealso{
