@@ -1,5 +1,5 @@
 context("get_fulcrum")
-# Check that .validate_years handles invalid years -----------------------------
+# Check that get_fulcrum fetches data and returns a proper data.frame object ---
 
 test_that("get_fulcrum returns a dataframe", {
   x <- get_fulcrum()
