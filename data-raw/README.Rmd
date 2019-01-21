@@ -18,34 +18,76 @@ library(sf)
 
 ### Add a Shapefile of Australia
 
-This is our base layer, Australia, of the map from (Naturalearth.com)[https://naturalearth.com/]
+This is our base layer, Australia, of the map from [Naturalearth.com](https://naturalearth.com/).
 
 ```{r, australia}
 
-oz_sf <- ne_states(geounit = "australia",
-                      returnclass = "sf")
+oz <- ne_states(geounit = "australia", returnclass = "sf")
 
-plot(oz_sf)
+plot(oz)
 ```
 
+## Crop and Reproject
+
 However, for the data that this package is intended for use with, only New South Wales and
-Queensland are necessary.
+Queensland are necessary. 
+
+Also for cartography purposes, we will reproject the map to Australian Albers for A.C.T., N.S.W and Qld.
+
+Two objects are created, one `oz_label` for state outlines and labels and the other, `oz_outline` for a basic country outline to use over the top of `oz_label`.
 
 ```{r crop_shape}
+bound <- raster::extent(131,
+                        155,
+                        -39,
+                        -10)
 
-oz_sf <- st_crop(x = oz_sf,
-                 xmin = 138.0002,
-                 ymin = -37.51029,
-                 xmax = 153.6306,
-                 ymax = -9.240167)
+oz_label <- sf::st_intersection(oz,
+                             sf::st_set_crs(
+                               sf::st_as_sf(
+                                 as(bound,
+                                    "SpatialPolygons")),
+                               sf::st_crs(oz))) %>%
+  sf::st_transform(crs = 3577)
 
-oz_sf <- oz_sf[oz_sf$abbrev != "J.B.T.", ]
+oz_label <-
+  oz_label %>%
+  dplyr::mutate(
+    CENTROID = purrr::map(geometry, sf::st_centroid),
+    COORDS = purrr::map(CENTROID, sf::st_coordinates),
+    COORDS_X = purrr::map_dbl(COORDS, 1),
+    COORDS_Y = purrr::map_dbl(COORDS, 2)
+  )
 
-plot(oz_sf)
+oz_label$nudge_x <- 0
+oz_label$nudge_y <- 0
+
+oz_outline <-
+  oz %>%
+  dplyr::group_by(admin) %>%
+  dplyr::summarize() %>%
+  sf::st_intersection(
+    sf::st_set_crs(
+      sf::st_as_sf(
+        as(bound,
+           "SpatialPolygons")),
+      sf::st_crs(oz))) %>%
+  sf::st_transform(crs = 3577)
+
+plot(oz_label)
+
+plot(oz_outline)
 ```
 
 ## Save Data for Use as Base Map
 
 ```{r save-data}
-usethis::use_data(oz_sf)
+usethis::use_data(oz_label, overwrite = TRUE)
+usethis::use_data(oz_outline, overwrite = TRUE)
+```
+
+## R System Information
+
+```{r packages-used}
+sessioninfo::session_info()
 ```
