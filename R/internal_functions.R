@@ -130,9 +130,10 @@
     )
 }
 
-.simple_cap <- function(x) {
-  x <- tolower(x)
-  s <- strsplit(x, " ")[[1]]
-  paste(toupper(substring(s, 1, 1)), substring(s, 2),
-        sep = "", collapse = " ")
+
+#' Capitalises Only the First Letter
+#' @param .sc Text to be cleaned to "Upper and lower case only" format.
+#' @noRd
+.simple_cap <- function(sc) {
+  sub("(.)", ("\\U\\1"), tolower(sc), perl = TRUE)
 }
