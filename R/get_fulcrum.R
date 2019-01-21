@@ -36,7 +36,7 @@ get_fulcrum <- function(url = NULL) {
   # growth_stage
   crop_meta <-
     fd %>% dplyr::select(.data$fulcrum_id,
-                          .data$crop:.data$winter_cereal_growth_stage_) %>%
+                         .data$crop:.data$winter_cereal_growth_stage_) %>%
     tidyr::gather(key = "crop_gs",
                   value = "growth_stage",
                   -c("fulcrum_id", "crop", "cultivar")) %>%
@@ -47,8 +47,10 @@ get_fulcrum <- function(url = NULL) {
     fd %>% dplyr::select(.data$fulcrum_id, .data$actual_yield)
 
   previous_crop <-
-    fd %>% dplyr::select(.data$fulcrum_id,
-                         .data$immediate_previous_crop:crop_3rd_previous_season)
+    fd %>% dplyr::select(
+      .data$fulcrum_id,
+      .data$immediate_previous_crop:.data$crop_3rd_previous_season
+    )
 
   # create tibble for disease observations -------------------------------------
   # disease
@@ -152,7 +154,7 @@ get_fulcrum <- function(url = NULL) {
       dplyr::left_join(xy, by = "fulcrum_id") %>%
       dplyr::left_join(crop_meta, by = "fulcrum_id") %>%
       dplyr::left_join(actual_yield, by = "fulcrum_id") %>%
-      dplyr::left_join(previous_crop, by = "fulcrum_id" ) %>%
+      dplyr::left_join(previous_crop, by = "fulcrum_id") %>%
       dplyr::left_join(disease_incidence, by = "fulcrum_id") %>%
       dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
                                                         tz = "GMT")) %>%
@@ -685,4 +687,3 @@ get_fulcrum <- function(url = NULL) {
 .simple_cap <- function(sc) {
   sub("(.)", ("\\U\\1"), tolower(sc), perl = TRUE)
 }
-
