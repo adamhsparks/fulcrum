@@ -6,11 +6,11 @@
   "@type": "SoftwareSourceCode",
   "identifier": "fulcrum",
   "description": "Accesses 'Fulcrum' shared data to make it easier to query and use\n  for for reporting purposes.",
-  "name": "fulcrum: 'Fulcrum' Client to Query and Tidy Data",
+  "name": "fulcrum: 'Fulcrum' Client to Query and Tidy Data and Other Tools and Data for Reporting",
   "codeRepository": "https://github.com/adamhsparks/fulcrum",
   "issueTracker": "https://github.com/adamhsparks/fulcrum/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -167,7 +167,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/fulcrum/blob/master/README.md",
-  "fileSize": "57.409KB",
+  "fileSize": "275.197KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/fulcrum",
     "https://ci.appveyor.com/project/adamhsparks/fulcrum",
@@ -175,5 +175,9 @@
   ],
   "developmentStatus": "https://www.tidyverse.org/lifecycle/#stable",
   "releaseNotes": "https://github.com/adamhsparks/fulcrum/blob/master/NEWS.md",
-  "keywords": ["r", "fulcrum", "reporting-pipeline"]
+  "keywords": [
+    "r",
+    "fulcrum",
+    "reporting-pipeline"
+  ]
 }
