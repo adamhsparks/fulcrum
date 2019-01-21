@@ -7,7 +7,7 @@
 #'  \code{\link{get_fulcrum}}.
 #' @param crop Optional. Character vector of crop(s) to filter on.
 #' @param disease Optional. Character vector of disease(s) to filter on.
-#' @param location Optional. Character vector of location(s) to filter on.
+#' @param location_description Optional. Character vector of location(s) to filter on.
 #' @param season Optional. Character vector of season(s) to filter on.
 #'
 #' @section Accepted \code{crop} Values:
