@@ -7,6 +7,8 @@
 disease_boxplot(fd, crop_graph)
 }
 \arguments{
+\item{fd}{Fulcrum data retrieved using \code{get_fulcrum}.}
+
 \item{crop_graph}{Crop of interest to produce a graph for.
 
 #' @section Accepted \code{crop} Values:
@@ -23,8 +25,6 @@ disease_boxplot(fd, crop_graph)
    \item \code{sunflower},
    \item \code{wheat}
  }}
-
-\item{survey}{Fulcrum data retrieved using \code{get_fulcrum}.}
 }
 \description{
 Produce Boxplots of Disease Survey Data for a Given Crop
