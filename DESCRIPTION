@@ -1,7 +1,7 @@
 Package: fulcrum
 Type: Package
 Title: 'Fulcrum' Client to Query and Tidy Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Adam H.", "Sparks",
     role = c("aut", "cre"), email = "adamhsparks@gmail.com",
