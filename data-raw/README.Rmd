@@ -1,0 +1,51 @@
+---
+title: "Create Qld and NSW State Map Base"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Libraries
+
+```{r libraries}
+library(rnaturalearth)
+library(sf)
+```
+
+# Get the Data to Create Our Map
+
+### Add a Shapefile of Australia
+
+This is our base layer, Australia, of the map from (Naturalearth.com)[https://naturalearth.com/]
+
+```{r, australia}
+
+oz_sf <- ne_states(geounit = "australia",
+                      returnclass = "sf")
+
+plot(oz_sf)
+```
+
+However, for the data that this package is intended for use with, only New South Wales and
+Queensland are necessary.
+
+```{r crop_shape}
+
+oz_sf <- st_crop(x = oz_sf,
+                 xmin = 138.0002,
+                 ymin = -37.51029,
+                 xmax = 153.6306,
+                 ymax = -9.240167)
+
+oz_sf <- oz_sf[oz_sf$abbrev != "J.B.T.", ]
+
+plot(oz_sf)
+```
+
+## Save Data for Use as Base Map
+
+```{r save-data}
+usethis::use_data(oz_sf)
+```
