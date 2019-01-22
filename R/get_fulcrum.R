@@ -4,7 +4,8 @@
 #' disease incidence and oher related notes for reporting.
 #' @param url A url provided by \url{https://www.fulcrumapp.com/} for sharing a
 #' 'CSV' format fill of Fulcrum data
-#' @return A tidy data frame \code{tibble} object of Fulcrum survey data
+#' @return A \code{\link{sf}} object of Fulcrum survey data projected into
+#' Australia Albers for mapping
 #' @examples
 #'
 #' \dontrun{
@@ -148,6 +149,8 @@ get_fulcrum <- function(url = NULL) {
     dplyr::mutate(agronomist = tolower(.data$agronomist)) %>%
     dplyr::mutate(agronomist = tools::toTitleCase(.data$agronomist))
 
+
+
   return(
     out <-
       dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
@@ -168,7 +171,9 @@ get_fulcrum <- function(url = NULL) {
         system_updated_at = lubridate::as_datetime(.data$system_updated_at,
                                                    tz = "GMT")
       ) %>%
-      dplyr::mutate(incidence = as.integer(.data$incidence))
+      dplyr::mutate(incidence = as.integer(.data$incidence)) %>%
+      sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
+      sf::st_transform(crs = 3577)
   )
 }
 

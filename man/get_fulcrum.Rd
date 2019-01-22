@@ -11,7 +11,8 @@ get_fulcrum(url = NULL)
 'CSV' format fill of Fulcrum data}
 }
 \value{
-A tidy data frame \code{tibble} object of Fulcrum survey data
+A \code{\link{sf}} object of Fulcrum survey data projected into
+Australia Albers for mapping
 }
 \description{
 Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
