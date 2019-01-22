@@ -1,9 +1,9 @@
 context("get_fulcrum")
 # Check that get_fulcrum fetches data and returns a proper data.frame object ---
 
-test_that("get_fulcrum returns a dataframe", {
+test_that("get_fulcrum returns an sf object", {
   x <- get_fulcrum()
-  expect_is(x, "data.frame")
+  expect_is(x, "sf")
   expect_named(
     x,
     c(
@@ -23,8 +23,6 @@ test_that("get_fulcrum returns a dataframe", {
       "grower",
       "agronomist",
       "notes",
-      "latitude",
-      "longitude",
       "nearest_town",
       "region",
       "crop",
@@ -35,7 +33,8 @@ test_that("get_fulcrum returns a dataframe", {
       "crop_2nd_previous_season",
       "crop_3rd_previous_season",
       "disease",
-      "incidence"
+      "incidence",
+      "geometry"
     )
   )
 })
