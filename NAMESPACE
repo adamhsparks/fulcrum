@@ -3,5 +3,6 @@
 export(disease_boxplot)
 export(filter_fulcrum)
 export(get_fulcrum)
+export(map_fulcrum)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
