@@ -4,7 +4,7 @@
 #' disease incidence and oher related notes for reporting.
 #' @param url A url provided by \url{https://www.fulcrumapp.com/} for sharing a
 #' 'CSV' format fill of Fulcrum data
-#' @return A \code{\link{sf}} object of Fulcrum survey data projected into
+#' @return A \code{\link[sf]{sf}} object of Fulcrum survey data projected into
 #' Australia Albers for mapping
 #' @examples
 #'

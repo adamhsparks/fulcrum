@@ -11,7 +11,7 @@ get_fulcrum(url = NULL)
 'CSV' format fill of Fulcrum data}
 }
 \value{
-A \code{\link{sf}} object of Fulcrum survey data projected into
+A \code{\link[sf]{sf}} object of Fulcrum survey data projected into
 Australia Albers for mapping
 }
 \description{
