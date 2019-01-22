@@ -1,3 +1,9 @@
+# 0.2.0
+
+## Major Changes
+
+- Adds `map_fulcrum()` function
+
 # 0.1.3
 
 ## Minor changes

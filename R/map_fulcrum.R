@@ -16,28 +16,31 @@ map_fulcrum <- function(fd) {
   fd <- unique(tibble::as_tibble(sf::st_coordinates(fd)))
 
   ggplot2::ggplot() +
-    ggplot2::geom_sf(data = oz_label,
+    ggplot2::geom_sf(data = fulcrum::oz_label,
                      linetype = "dotdash") +
-    ggplot2::geom_sf(data = oz_outline,
+    ggplot2::geom_sf(data = fulcrum::oz_outline,
                      fill = NA,
                      size = 0.65) +
     ggplot2::geom_text(
-      data = oz_label,
+      data = fulcrum::oz_label,
       position = ggplot2::position_nudge(y = -55),
       size = 5,
       vjust = -1,
       hjust = 0.85,
       mapping = ggplot2::aes(
-        x = COORDS_X,
-        y = COORDS_Y,
-        label = ifelse(abbrev == "J.B.T." | abbrev == "Tas.",
-                       "",
-                       abbrev)
+        x = fulcrum::oz_label$COORDS_X,
+        y = fulcrum::oz_label$COORDS_Y,
+        label = ifelse(
+          fulcrum::oz_label$abbrev == "J.B.T." |
+            fulcrum::oz_label$abbrev == "Tas.",
+          "",
+          fulcrum::oz_label$abbrev
+        )
       )
     ) +
     ggplot2::geom_hex(data = fd,
-                      ggplot2::aes(x = X,
-                                   y = Y)) +
+                      ggplot2::aes(x = fd$X,
+                                   y = fd$Y)) +
     ggplot2::xlab("Longitude") +
     ggplot2::ylab("Latitude") +
     ggplot2::labs(caption = "Data: Naturalearthdata and DAQ00186")

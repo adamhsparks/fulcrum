@@ -155,6 +155,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tibble"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
       "provider": {
@@ -164,10 +176,15 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
     }
   ],
   "readme": "https://github.com/adamhsparks/fulcrum/blob/master/README.md",
-  "fileSize": "276.281KB",
+  "fileSize": "276.328KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/fulcrum",
     "https://ci.appveyor.com/project/adamhsparks/fulcrum",
