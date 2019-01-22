@@ -1,3 +1,9 @@
+# 0.1.3
+
+## Minor changes
+
+- Return `sf` object from `get_fulcrum()` that is projected in Australia Albers
+
 # 0.1.2
 
 ## Minor Changes
