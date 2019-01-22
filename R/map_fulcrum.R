@@ -24,9 +24,9 @@ map_fulcrum <- function(fd) {
     ggplot2::geom_text(
       data = fulcrum::oz_label,
       position = ggplot2::position_nudge(y = -55),
-      size = 5,
-      vjust = -1,
-      hjust = 0.85,
+      size = 2.5,
+      vjust = -.5,
+      hjust = 0.75,
       mapping = ggplot2::aes(
         x = fulcrum::oz_label$COORDS_X,
         y = fulcrum::oz_label$COORDS_Y,
