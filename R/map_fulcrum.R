@@ -4,7 +4,7 @@
 #' Paddocks are not identified to lat/lon, but binned in hexes to avoid accurate
 #' identification being possible.
 #'
-#' @param fd Required. Fulcrum data to be filtered.  Data must be a result of
+#' @param fd Required.  Fulcrum data to be filtered.  Data must be a result of
 #'  \code{\link{get_fulcrum}}.
 #'
 #' @return A hexbin map of survey locations as a \pkg{\link[ggplot2]{ggplot2}}
@@ -38,9 +38,9 @@ map_fulcrum <- function(fd) {
         )
       )
     ) +
-    ggplot2::geom_hex(data = fd,
-                      ggplot2::aes(x = fd$X,
-                                   y = fd$Y)) +
+    ggplot2::geom_bin2d(data = fd,
+                        ggplot2::aes(x = fd$X,
+                                     y = fd$Y)) +
     ggplot2::xlab("Longitude") +
     ggplot2::ylab("Latitude") +
     ggplot2::labs(caption = "Data: Naturalearthdata and DAQ00186")
