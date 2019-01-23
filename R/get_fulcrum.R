@@ -31,7 +31,7 @@ get_fulcrum <- function(url = NULL) {
   # fetch data from fulcrumapp.com ---------------------------------------------
   fd <- .fetch_data(.url = url)
 
-  # create a tibble for crop metadata ------------------------------------------
+  # crop metadata --------------------------------------------------------------
   # crop
   # cultivar
   # growth_stage
@@ -53,7 +53,7 @@ get_fulcrum <- function(url = NULL) {
       .data$immediate_previous_crop:.data$crop_3rd_previous_season
     )
 
-  # create tibble for disease observations -------------------------------------
+  # disease observations -------------------------------------------------------
   # disease
   # incidence in paddock
   disease_incidence <- .create_di_df(.fd = fd)
@@ -92,7 +92,7 @@ get_fulcrum <- function(url = NULL) {
                      by = c("fulcrum_id", "disease", "incidence")) %>%
     tidyr::drop_na(.data$incidence)
 
-  # create a tibble for geocoded locations -------------------------------------
+  # geographic locations -------------------------------------------------------
   # lon
   # lat
   # nearest town
@@ -106,75 +106,82 @@ get_fulcrum <- function(url = NULL) {
       .data$region
     ) %>%
     dplyr::mutate(nearest_town = tolower(.data$nearest_town)) %>%
-    dplyr::mutate(nearest_town = tools::toTitleCase(.data$nearest_town))
-
-  # create a tibble for observer and observation metadata ----------------------
-  # when created
-  # when modified
-  # who created
-  # who modified
-  # version (1 is original)
-  # what season does the observation cover
-  # how many plants were checked
-  observation_meta <-
-    fd %>%
-    dplyr::select(
-      .data$fulcrum_id,
-      .data$created_at:version,
-      .data$season,
-      .data$total_plant_count
+    dplyr::mutate(nearest_town = tools::toTitleCase(.data$nearest_town)) %>%
+    dplyr::mutate(
+      state = dplyr::case_when(
+        .data$region == "Central Queensland" ~ "Queensland",
+        .data$region == "Southern Queensland" ~ "Queensland",
+        .data$region == "Northern New South Wales" ~ "New South Wales"
+      )
     )
 
-  # create a tibble for paddock information ------------------------------------
-  # USQ paddock identifcation number
-  # Type of location (farm field, commercial trial, etc.)
-  # landform (irrigated or dryland)
-  # grower's name
-  # grower's contact info
-  # agronomist's name
-  # agronomist's contact info
-  # any freeform notes taken
-  paddock_meta <-
-    fd %>%
-    dplyr::select(
-      .data$fulcrum_id,
-      .data$paddockproperty:.data$location_description,
-      .data$landform,
-      .data$grower,
-      .data$agronomist,
-      .data$notes
-    ) %>%
-    dplyr::mutate(grower = tolower(.data$grower)) %>%
-    dplyr::mutate(grower = tools::toTitleCase(.data$grower)) %>%
-    dplyr::mutate(agronomist = tolower(.data$agronomist)) %>%
-    dplyr::mutate(agronomist = tools::toTitleCase(.data$agronomist))
-
-
-
-  return(
-    out <-
-      dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
-      dplyr::left_join(xy, by = "fulcrum_id") %>%
-      dplyr::left_join(crop_meta, by = "fulcrum_id") %>%
-      dplyr::left_join(actual_yield, by = "fulcrum_id") %>%
-      dplyr::left_join(previous_crop, by = "fulcrum_id") %>%
-      dplyr::left_join(disease_incidence, by = "fulcrum_id") %>%
-      dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
-                                                        tz = "GMT")) %>%
-      dplyr::mutate(updated_at = lubridate::as_datetime(.data$updated_at,
-                                                        tz = "GMT")) %>%
-      dplyr::mutate(
-        system_created_at = lubridate::as_datetime(.data$system_created_at,
-                                                   tz = "GMT")
-      ) %>%
-      dplyr::mutate(
-        system_updated_at = lubridate::as_datetime(.data$system_updated_at,
-                                                   tz = "GMT")
-      ) %>%
-      dplyr::mutate(incidence = as.integer(.data$incidence)) %>%
-      sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
-      sf::st_transform(crs = 3577)
+# observer and observation metadata ------------------------------------------
+# when created
+# when modified
+# who created
+# who modified
+# version (1 is original)
+# what season does the observation cover
+# how many plants were checked
+observation_meta <-
+  fd %>%
+  dplyr::select(
+    .data$fulcrum_id,
+    .data$created_at:version,
+    .data$season,
+    .data$total_plant_count
   )
+
+# paddock information --------------------------------------------------------
+# USQ paddock identifcation number
+# Type of location (farm field, commercial trial, etc.)
+# landform (irrigated or dryland)
+# grower's name
+# grower's contact info
+# agronomist's name
+# agronomist's contact info
+# any freeform notes taken
+paddock_meta <-
+  fd %>%
+  dplyr::select(
+    .data$fulcrum_id,
+    .data$paddockproperty:.data$location_description,
+    .data$landform,
+    .data$grower,
+    .data$agronomist,
+    .data$notes
+  ) %>%
+  dplyr::mutate(grower = tolower(.data$grower)) %>%
+  dplyr::mutate(grower = tools::toTitleCase(.data$grower)) %>%
+  dplyr::mutate(agronomist = tolower(.data$agronomist)) %>%
+  dplyr::mutate(agronomist = tools::toTitleCase(.data$agronomist))
+
+
+
+return(
+  out <-
+    dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
+    dplyr::left_join(xy, by = "fulcrum_id") %>%
+    dplyr::left_join(crop_meta, by = "fulcrum_id") %>%
+    dplyr::left_join(actual_yield, by = "fulcrum_id") %>%
+    dplyr::left_join(previous_crop, by = "fulcrum_id") %>%
+    dplyr::left_join(disease_incidence, by = "fulcrum_id") %>%
+    dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
+                                                      tz = "GMT")) %>%
+    dplyr::mutate(updated_at = lubridate::as_datetime(.data$updated_at,
+                                                      tz = "GMT")) %>%
+    dplyr::mutate(
+      system_created_at = lubridate::as_datetime(.data$system_created_at,
+                                                 tz = "GMT")
+    ) %>%
+    dplyr::mutate(
+      system_updated_at = lubridate::as_datetime(.data$system_updated_at,
+                                                 tz = "GMT")
+    ) %>%
+    dplyr::mutate(incidence = as.integer(.data$incidence)) %>%
+    sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
+    sf::st_transform(crs = 3577)
+)
 }
 
 # Functions for internal use in this function only -----------------------------

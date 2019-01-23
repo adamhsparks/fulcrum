@@ -25,6 +25,7 @@ test_that("get_fulcrum returns an sf object", {
       "notes",
       "nearest_town",
       "region",
+      "state",
       "crop",
       "cultivar",
       "growth_stage",
