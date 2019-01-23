@@ -7,7 +7,7 @@
 map_fulcrum(fd)
 }
 \arguments{
-\item{fd}{Required. Fulcrum data to be filtered.  Data must be a result of
+\item{fd}{Required.  Fulcrum data to be filtered.  Data must be a result of
 \code{\link{get_fulcrum}}.}
 }
 \value{
