@@ -1,3 +1,11 @@
+# 0.2.1
+
+## Minor Changes
+
+- Uses `geom_bin2d` in place of `geom_hex` due to issues displaying a single point or two with hexes
+
+- Adds a "state" column to the data returned from `get_fulcrum()`
+
 # 0.2.0
 
 ## Major Changes
