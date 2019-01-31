@@ -4,10 +4,10 @@
 \alias{get_fulcrum}
 \title{Fetches Data from Fulcrum.app and Formats Them for Use in Reporting}
 \usage{
-get_fulcrum(url = NULL)
+get_fulcrum(fulcrum_url = NULL)
 }
 \arguments{
-\item{url}{A url provided by \url{https://www.fulcrumapp.com/} for sharing a
+\item{fulcrum_url}{A url provided by \url{https://www.fulcrumapp.com/} for sharing a
 'CSV' format fill of Fulcrum data}
 }
 \value{
@@ -27,7 +27,7 @@ x <- get_fulcrum()
 
 \dontrun{
 # specify a url to get data from Fulcrum
-x <- get_fulcrum(url = "https://web.fulcrumapp.com/shares/########.csv")
+x <- get_fulcrum(fulcrum_url = "https://web.fulcrumapp.com/shares/########.csv")
 }
 
 }
