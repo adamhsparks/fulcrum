@@ -10,7 +10,7 @@
   "codeRepository": "https://github.com/adamhsparks/fulcrum",
   "issueTracker": "https://github.com/adamhsparks/fulcrum/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -184,7 +184,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/fulcrum/blob/master/README.md",
-  "fileSize": "276.484KB",
+  "fileSize": "279.228KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/fulcrum",
     "https://ci.appveyor.com/project/adamhsparks/fulcrum",

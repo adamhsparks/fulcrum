@@ -1,4 +1,12 @@
-# fulcrum 0.2.1.9000
+# fulcrum 0.2.2
+
+## Minor Changes
+
+- Add paramter to fetch and return only location information with no disease observations
+
+## Bug Fixes
+
+- Spell check package
 
 # 0.2.1
 
@@ -8,19 +16,19 @@
 
 - Adds a "state" column to the data returned from `get_fulcrum()`
 
-# 0.2.0
+# fulcrum 0.2.0
 
 ## Major Changes
 
 - Adds `map_fulcrum()` function
 
-# 0.1.3
+# fulcrum 0.1.3
 
 ## Minor changes
 
 - Return `sf` object from `get_fulcrum()` that is projected in Australia Albers
 
-# 0.1.2
+# fulcrum 0.1.2
 
 ## Minor Changes
 
@@ -31,19 +39,19 @@
 - Project both sets of data to Albers
 
 
-# 0.1.1
+# fulcrum 0.1.1
 
 ## Bug Fixes
 
 - Fixes bugs in prior release so that it now passes checks
 
-# 0.1.0
+# fulcrum 0.1.0
 
 ## Major Changes
 
 - Adds new functionality, `disease_boxplot()` to generate boxplots of survey results for reporting
 
-# 0.0.2-1
+# fulcrum 0.0.2-1
 
 ## Bug Fixes
 
