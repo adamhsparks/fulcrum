@@ -179,6 +179,8 @@ return(
                                                  tz = "GMT")
     ) %>%
     dplyr::mutate(incidence = as.integer(.data$incidence)) %>%
+    dplyr::mutate(lon = .data$longitude) %>%
+    dplyr::mutate(lat = .data$latitude) %>%
     sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
     sf::st_transform(crs = 3577)
 )
