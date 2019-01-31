@@ -35,6 +35,8 @@ test_that("get_fulcrum returns an sf object", {
       "crop_3rd_previous_season",
       "disease",
       "incidence",
+      "lon",
+      "lat",
       "geometry"
     )
   )
