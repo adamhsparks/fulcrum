@@ -212,7 +212,7 @@ return(
           canola_powdery_mildew = "powdery mildew",
           canola_blackleg = "blackleg",
           canola_sclerotinia_stem_rot = "stem rot",
-          virus_of_canola = "virus",
+          canola_virus = "virus",
           chickpea_ascochyta_blight = "aschochyta blight",
           chickpea_botrytis_grey_mould = "botrytis grey mould",
           chickpea_fusarium_wilt = "fusarium wilt",

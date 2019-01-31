@@ -1,3 +1,8 @@
+#' @noRd
+`%notin%` <- function(x, table) {
+  # Same as !(x %in% table)
+  match(x, table, nomatch = 0L) == 0L
+}
 
 #' Read Fulcrum Data from Fulcrum Site
 #' @param .url A url of a shared 'CSV' file of Fulcrum data
@@ -54,7 +59,7 @@
     "canola_powdery_mildew" <-
     "canola_blackleg" <-
     "canola_sclerotinia_stem_rot" <-
-    "virus_of_canola" <-
+    "canola_virus" <-
     "canola_other" <-
     "describe_canola_other" <-
     "chickpea_ascochyta_blight" <-
