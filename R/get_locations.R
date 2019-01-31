@@ -24,7 +24,7 @@
 #' @importFrom rlang .data
 get_locations <- function(fulcrum_url = NULL) {
   # get URL using system environment if not otherwise provided -----------------
-  if (is.null(url)) {
+  if (is.null(fulcrum_url)) {
     fulcrum_url <- Sys.getenv("FULCRUM_DATA_URL")
   }
 
