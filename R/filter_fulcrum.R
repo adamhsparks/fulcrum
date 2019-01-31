@@ -164,7 +164,6 @@ filter_fulcrum <- function(fd,
                            location_description = NULL,
                            season = NULL) {
   target_c <- crop
-  target_d <- disease
   target_ld <- location_description
   target_s <- season
 
@@ -187,106 +186,6 @@ filter_fulcrum <- function(fd,
            "The `crop` you have specified is not valid")
     }
   }
-
-  if (!is.null(disease)) {
-    target_d <- tolower(target_d)
-
-    if (target_d %notin% c(
-      "fusarium head blightscab",
-      "net form net blotch",
-      "spot form net blotch",
-      "powdery mildew",
-      "stem rust",
-      "virus",
-      "powdery mildew",
-      "blackleg",
-      "sclerotinia stem rot",
-      "ascochyta blight",
-      "botrytis grey mould",
-      "fusarium wilt",
-      "phytoplasma",
-      "phytophthora root rot",
-      "bacterial stalk rot and bacterial top rot",
-      "charcoal rot",
-      "common rust",
-      "commonboil smut",
-      "crazy top",
-      "damping off",
-      "diplodia cob rot",
-      "downy mildew",
-      "dwarf mosaic virus",
-      "fusarium ear rot",
-      "fusarium stalk rot",
-      "head smut",
-      "pythium stalk rot",
-      "turcica leaf blight",
-      "maydis leaf blight",
-      "southern rust",
-      "alternaria leaf spot",
-      "bacterial blight",
-      "fusarium wilt",
-      "gummy pod",
-      "halo blight",
-      "phytoplasma",
-      "powdery mildew",
-      "puffy pod",
-      "rhizoctonia rot",
-      "root lesion nematode",
-      "sclerotinia stem rot",
-      "sclerotium stem rot",
-      "tan spot",
-      "tsv",
-      "fusarium root rot",
-      "neocosmospora root rot",
-      "net blotch",
-      "peanut kernel shrivel syndrome",
-      "root lesion nematode",
-      "rust",
-      "sclerotium base rot",
-      "bacterial top and stalk rot",
-      "damping off",
-      "ergot",
-      "fusarium head blight",
-      "fusarium stalk rot",
-      "grain mould",
-      "head smut",
-      "johnsongrass mosaic virus",
-      "leaf blight",
-      "root lesion nematode",
-      "sclerotium base rot",
-      "tar spot",
-      "bacterial blight bacterial pustule",
-      "peanut mottle virus",
-      "phomopsis seed decay",
-      "phytophthora root stem and root rot",
-      "[od stem cankerblight",
-      "purple seed stain",
-      "rhizoctonia rot",
-      "root lesion nematode",
-      "sclerotinia rot",
-      "soybean mosaic virus",
-      "apical chlorosis",
-      "botrytis head rot grey mould",
-      "rhizopus head rot",
-      "sclerotinia rot",
-      "sclerotium base rot",
-      "stem cankerblight",
-      "verticillium wilt",
-      "crown rot",
-      "common root rot",
-      "leafbrown rust",
-      "root lesion nematode",
-      "septoria nodorum blotch",
-      "stemblack rust",
-      "stripeyellow rust",
-      "yellow spot",
-      "white grain"
-    )) {
-      stop(call. = FALSE,
-           "The `disease` you have specified is not valid")
-    }
-  }
-
   if (!is.null(location_description)) {
     target_ld <- .simple_cap(target_ld)
 
@@ -311,13 +210,122 @@ filter_fulcrum <- function(fd,
     }
   }
 
+  if (ncol(fd) == 31) {
+    target_d <- disease
+    if (!is.null(disease)) {
+      target_d <- tolower(target_d)
+
+      if (target_d %notin% c(
+        "fusarium head blightscab",
+        "net form net blotch",
+        "spot form net blotch",
+        "powdery mildew",
+        "stem rust",
+        "virus",
+        "powdery mildew",
+        "blackleg",
+        "sclerotinia stem rot",
+        "ascochyta blight",
+        "botrytis grey mould",
+        "fusarium wilt",
+        "phytoplasma",
+        "phytophthora root rot",
+        "bacterial stalk rot and bacterial top rot",
+        "charcoal rot",
+        "common rust",
+        "commonboil smut",
+        "crazy top",
+        "damping off",
+        "diplodia cob rot",
+        "downy mildew",
+        "dwarf mosaic virus",
+        "fusarium ear rot",
+        "fusarium stalk rot",
+        "head smut",
+        "pythium stalk rot",
+        "turcica leaf blight",
+        "maydis leaf blight",
+        "southern rust",
+        "alternaria leaf spot",
+        "bacterial blight",
+        "fusarium wilt",
+        "gummy pod",
+        "halo blight",
+        "phytoplasma",
+        "powdery mildew",
+        "puffy pod",
+        "rhizoctonia rot",
+        "root lesion nematode",
+        "sclerotinia stem rot",
+        "sclerotium stem rot",
+        "tan spot",
+        "tsv",
+        "fusarium root rot",
+        "neocosmospora root rot",
+        "net blotch",
+        "peanut kernel shrivel syndrome",
+        "root lesion nematode",
+        "rust",
+        "sclerotium base rot",
+        "bacterial top and stalk rot",
+        "damping off",
+        "ergot",
+        "fusarium head blight",
+        "fusarium stalk rot",
+        "grain mould",
+        "head smut",
+        "johnsongrass mosaic virus",
+        "leaf blight",
+        "root lesion nematode",
+        "sclerotium base rot",
+        "tar spot",
+        "bacterial blight bacterial pustule",
+        "peanut mottle virus",
+        "phomopsis seed decay",
+        "phytophthora root stem and root rot",
+        "pod stem cankerblight",
+        "purple seed stain",
+        "rhizoctonia rot",
+        "root lesion nematode",
+        "sclerotinia rot",
+        "soybean mosaic virus",
+        "apical chlorosis",
+        "botrytis head rot grey mould",
+        "rhizopus head rot",
+        "sclerotinia rot",
+        "sclerotium base rot",
+        "stem cankerblight",
+        "verticillium wilt",
+        "crown rot",
+        "common root rot",
+        "leafbrown rust",
+        "root lesion nematode",
+        "septoria nodorum blotch",
+        "stemblack rust",
+        "stripeyellow rust",
+        "yellow spot",
+        "white grain"
+      )) {
+        stop(call. = FALSE,
+             "The `disease` you have specified is not valid")
+      }
+    }
+
+    fd <-
+      fd %>%
+      dplyr::filter(
+        crop %in% target_c |
+          disease %in% target_d |
+          location_description %in% target_ld |
+          season %in% target_s
+      )
+    return(fd)
+  }
+
   fd <-
     fd %>%
-    dplyr::filter(
-      crop %in% target_c |
-        disease %in% target_d |
-        location_description %in% target_ld |
-        season %in% target_s
-    )
+    dplyr::filter(crop %in% target_c |
+                    location_description %in% target_ld |
+                    season %in% target_s)
   return(fd)
 }

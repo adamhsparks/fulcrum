@@ -28,6 +28,10 @@ disease incidence and oher related notes for reporting.
 # using a URL set in the .Renviron, get data from Fulcrum
 x <- get_fulcrum()
 }
+\dontrun{
+# fetch only location information with no disease data
+x <- get_fulcrum(locations_only = TRUE)
+}
 
 \dontrun{
 # specify a url to get data from Fulcrum

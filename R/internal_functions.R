@@ -247,7 +247,7 @@
       canola_powdery_mildew = readr::col_integer(),
       canola_blackleg = readr::col_integer(),
       canola_sclerotinia_stem_rot = readr::col_integer(),
-      virus_of_canola = readr::col_integer(),
+      canola_virus = readr::col_integer(),
       canola_other = readr::col_integer(),
       describe_canola_other = readr::col_character(),
       chickpea_ascochyta_blight = readr::col_integer(),
