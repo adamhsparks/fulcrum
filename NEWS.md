@@ -2,11 +2,15 @@
 
 ## Minor Changes
 
-- Add paramter to fetch and return only location information with no disease observations
+- Add parameter to fetch and return only location information with no disease observations
+
+- Add internal checks to `filter_fulcrum()` to check user input
 
 ## Bug Fixes
 
 - Spell check package
+
+- Corrections to documentation
 
 # 0.2.1
 
