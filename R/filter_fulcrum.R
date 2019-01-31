@@ -102,3 +102,4 @@ filter_fulcrum <- function(fd,
     )
   return(fd)
 }
+

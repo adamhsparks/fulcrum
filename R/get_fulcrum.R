@@ -319,10 +319,3 @@ return(
         )
     )
 }
-
-#' Capitalises Only the First Letter
-#' @param .sc Text to be cleaned to "Upper and lower case only" format.
-#' @noRd
-.simple_cap <- function(sc) {
-  sub("(.)", ("\\U\\1"), tolower(sc), perl = TRUE)
-}
