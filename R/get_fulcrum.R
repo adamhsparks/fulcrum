@@ -2,8 +2,11 @@
 #'
 #' Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
 #' disease incidence and oher related notes for reporting.
-#' @param fulcrum_url A url provided by \url{https://www.fulcrumapp.com/} for sharing a
-#' 'CSV' format fill of Fulcrum data
+#' @param fulcrum_url A url provided by \url{https://www.fulcrumapp.com/} for
+#' sharing a 'CSV' format fill of Fulcrum data
+#' @param locations_only Boolean.  If \code{TRUE}, return locations surveyed
+#' along with location and crop metadata but no disease observations.  Defaults
+#' to \code{FALSE}.
 #' @return A \code{\link[sf]{sf}} object of Fulcrum survey data projected into
 #' Australia Albers for mapping
 #' @examples
@@ -22,7 +25,7 @@
 #' @export get_fulcrum
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
-get_fulcrum <- function(fulcrum_url = NULL) {
+get_fulcrum <- function(fulcrum_url = NULL, locations_only = FALSE) {
   # get URL using system environment if not otherwise provided -----------------
   if (is.null(fulcrum_url)) {
     url <- Sys.getenv("FULCRUM_DATA_URL")
@@ -30,6 +33,38 @@ get_fulcrum <- function(fulcrum_url = NULL) {
 
   # fetch data from fulcrumapp.com ---------------------------------------------
   fd <- .fetch_data(.url = url)
+
+  if (isTRUE(locations_only)) {
+    location_meta <-
+      fd %>% dplyr::select(.data$fulcrum_id:.data$cultivar) %>%
+      dplyr::mutate(nearest_town = tolower(.data$nearest_town)) %>%
+      dplyr::mutate(nearest_town = tools::toTitleCase(.data$nearest_town)) %>%
+      dplyr::mutate(
+        state = dplyr::case_when(
+          .data$region == "Central Queensland" ~ "Queensland",
+          .data$region == "Southern Queensland" ~ "Queensland",
+          .data$region == "Northern New South Wales" ~ "New South Wales"
+        )
+      ) %>%
+      dplyr::mutate(created_at = lubridate::as_datetime(.data$created_at,
+                                                        tz = "GMT")) %>%
+      dplyr::mutate(updated_at = lubridate::as_datetime(.data$updated_at,
+                                                        tz = "GMT")) %>%
+      dplyr::mutate(system_created_at = lubridate::as_datetime(.data$system_created_at,
+                                                               tz = "GMT")) %>%
+      dplyr::mutate(system_updated_at = lubridate::as_datetime(.data$system_updated_at,
+                                                               tz = "GMT")) %>%
+      dplyr::mutate(lon = .data$longitude) %>%
+      dplyr::mutate(lat = .data$latitude) %>%
+      sf::st_as_sf(coords = c("longitude", "latitude"), crs = 4326) %>%
+      sf::st_transform(crs = 3577) %>%
+      dplyr::select(-c(
+        .data$version:.data$assigned_to,
+        .data$location_description_other
+      ))
+
+    return(location_meta)
+  }
 
   # crop metadata --------------------------------------------------------------
   # crop
