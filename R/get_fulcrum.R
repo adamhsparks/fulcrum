@@ -1,7 +1,7 @@
 #' Fetches Data from Fulcrum.app and Formats Them for Use in Reporting
 #'
 #' Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
-#' disease incidence and oher related notes for reporting.
+#' disease incidence and other related notes for reporting.
 #' @param fulcrum_url A url provided by \url{https://www.fulcrumapp.com/} for
 #' sharing a 'CSV' format fill of Fulcrum data
 #' @param locations_only Boolean.  If \code{TRUE}, return locations surveyed

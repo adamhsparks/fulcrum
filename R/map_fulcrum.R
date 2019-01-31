@@ -1,13 +1,13 @@
 #' Create a Map of Survey Sites
 #'
 #' Generates a map of surveyed paddocks for all or selected crops or diseases.
-#' Paddocks are not identified to lat/lon, but binned in hexes to avoid accurate
-#' identification being possible.
+#' Paddocks are not identified to lat/lon, but binned in 2-dimensional points to
+#' avoid accurate identification being possible.
 #'
 #' @param fd Required.  Fulcrum data to be filtered.  Data must be a result of
 #'  \code{\link{get_fulcrum}}.
 #'
-#' @return A hexbin map of survey locations as a \pkg{\link[ggplot2]{ggplot2}}
+#' @return A 2-D map of survey locations as a \pkg{\link[ggplot2]{ggplot2}}
 #' object.
 #' @author adam.sparks@@usq.edu.au
 #' @export map_fulcrum

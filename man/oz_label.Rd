@@ -3,14 +3,14 @@
 \docType{data}
 \name{oz_label}
 \alias{oz_label}
-\title{Base Map of Queensland and New South Wales for Labelling}
+\title{Base Map of Queensland and New South Wales for Labeling}
 \format{A \code{\link[sf]{sf}} object.}
 \usage{
 oz_label
 }
 \description{
-Data to provide a basemap for reporting, this data provides a layer with
-state outlines and is suitable for labelling.
+Data to provide a base map for reporting, this data provides a layer with
+state outlines and is suitable for labeling.
 }
 \seealso{
 \code{\link{oz_outline}}

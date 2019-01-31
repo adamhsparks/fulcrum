@@ -20,7 +20,7 @@ Australia Albers for mapping
 }
 \description{
 Fetch and clean Fulcrum data from USQ/DAFQ in-paddock surveys of crop
-disease incidence and oher related notes for reporting.
+disease incidence and other related notes for reporting.
 }
 \examples{
 
