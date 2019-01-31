@@ -22,7 +22,7 @@
 #' @export get_locations
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
-get_locations <- function(url = NULL) {
+get_locations <- function(fulcrum_url = NULL) {
   # get URL using system environment if not otherwise provided -----------------
   if (is.null(url)) {
     fulcrum_url <- Sys.getenv("FULCRUM_DATA_URL")

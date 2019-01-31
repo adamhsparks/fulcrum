@@ -4,7 +4,7 @@
 \alias{get_locations}
 \title{Fetches Data from Fulcrum.app and Returns Only Locations and Location Information}
 \usage{
-get_locations(url = NULL)
+get_locations(fulcrum_url = NULL)
 }
 \arguments{
 \item{fulcrum_url}{A url provided by \url{https://www.fulcrumapp.com/} for sharing a
