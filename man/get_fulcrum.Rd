@@ -8,7 +8,7 @@ get_fulcrum(fulcrum_url = NULL, locations_only = FALSE)
 }
 \arguments{
 \item{fulcrum_url}{A url provided by \url{https://www.fulcrumapp.com/} for
-sharing a 'CSV' format fill of Fulcrum data}
+sharing a 'CSV' format file of Fulcrum data}
 
 \item{locations_only}{Boolean.  If \code{TRUE}, return locations surveyed
 along with location and crop metadata but no disease observations.  Defaults
