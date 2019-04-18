@@ -198,20 +198,6 @@ get_fulcrum <-
       dplyr::mutate(agronomist = tolower(.data$agronomist)) %>%
       dplyr::mutate(agronomist = tools::toTitleCase(.data$agronomist))
 
-    # photos -------------------------------------------------------------------
-    # photos
-    # photos_caption
-    # photos_url
-
-    photos <-
-      fd %>%
-      dplyr::select(
-        .data$fulcrum_id,
-        .data$photos,
-        .data$photos_caption,
-        .data$photos_url
-      )
-
     return(
       out <-
         dplyr::left_join(observation_meta, paddock_meta, by = "fulcrum_id") %>%
