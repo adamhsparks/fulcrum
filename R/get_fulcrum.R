@@ -33,7 +33,8 @@ get_fulcrum <- function(fulcrum_url = NULL, locations_only = FALSE) {
   # get URL using system environment if not otherwise provided -----------------
   if (is.null(fulcrum_url)) {
     url <- Sys.getenv("FULCRUM_DATA_URL")
-  }
+  } else
+    url <- fulcrum_url
 
   # fetch data from fulcrumapp.com ---------------------------------------------
   fd <- .fetch_data(.url = url)
