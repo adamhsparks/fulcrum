@@ -1,3 +1,7 @@
+# fulcrum retired
+
+With the conclusion of the DAQ00186 project, development and usage of `fulcrum` has ceased.
+
 # fulcrum 0.2.2
 
 ## Minor Changes
