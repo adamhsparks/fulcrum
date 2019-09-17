@@ -184,7 +184,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/fulcrum/blob/master/README.md",
-  "fileSize": "279.382KB",
+  "fileSize": "278.813KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/fulcrum",
     "https://ci.appveyor.com/project/adamhsparks/fulcrum",
