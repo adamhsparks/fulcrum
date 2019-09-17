@@ -1,4 +1,4 @@
-[![lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://www.tidyverse.org/lifecycle/#retired)
+[![Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
 [![DOI](https://zenodo.org/badge/161579332.svg)](https://zenodo.org/badge/latestdoi/161579332)
 
 # fulcrum
