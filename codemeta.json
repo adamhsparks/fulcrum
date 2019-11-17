@@ -14,10 +14,10 @@
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.5.2",
+    "version": "3.6.1",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.5.2 (2018-12-20)",
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
   "author": [
     {
       "@type": "Person",
@@ -184,7 +184,7 @@
     }
   ],
   "readme": "https://github.com/adamhsparks/fulcrum/blob/master/README.md",
-  "fileSize": "279.275KB",
+  "fileSize": "278.744KB",
   "contIntegration": [
     "https://travis-ci.org/adamhsparks/fulcrum",
     "https://ci.appveyor.com/project/adamhsparks/fulcrum",
@@ -196,5 +196,8 @@
     "r",
     "fulcrum",
     "reporting-pipeline"
-  ]
+  ],
+  "contributor": {},
+  "copyrightHolder": {},
+  "funder": {}
 }

@@ -1,10 +1,9 @@
-[![Build Status](https://travis-ci.org/adamhsparks/fulcrum.svg?branch=master)](https://travis-ci.org/adamhsparks/fulcrum)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/adamhsparks/fulcrum?branch=master&svg=true)](https://ci.appveyor.com/project/adamhsparks/fulcrum)
-[![Coverage status](https://codecov.io/gh/adamhsparks/fulcrum/branch/master/graph/badge.svg)](https://codecov.io/github/adamhsparks/fulcrum?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
 [![DOI](https://zenodo.org/badge/161579332.svg)](https://zenodo.org/badge/latestdoi/161579332)
 
 # fulcrum
+
+> This package has been retired with the completion of the GRDC funded research project DAQ00186. There will not be any further development to this package.
 
 The goal of `fulcrum` is to allow easy querying and cleaning of USQ/DAFQ paddock survey data for generating reports.
 
